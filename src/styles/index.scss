@@ -9,15 +9,24 @@ $background-color: #f9f9f9;
 $border-color: #e0e0e0;
 $text-secondary-color: #555;
 $text-light-color: #888;
-$rating-star-color: #FFD700;
+$rating-star-color: #ffd700;
 $hover-bg-color: rgba(0, 0, 0, 0.1);
 $hover-shadow-color: rgba(0, 0, 0, 0.2);
 
 /* Base styles */
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: Roboto, sans-serif;
   margin: 0;
   background-color: $background-color;
+}
+
+.card__image {
+  & img {
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto 15px;
+    display: block;
+  }
 }
 
 header {
@@ -46,7 +55,9 @@ header {
           color: $primary-color;
           font-weight: 500;
           text-transform: uppercase;
-          transition: color 300ms, border-bottom 300ms;
+          transition:
+            color 300ms,
+            border-bottom 300ms;
 
           &.is-active {
             font-weight: bold;
@@ -66,13 +77,23 @@ header {
 
 .catalog {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  /* Збільшено ширину карток */
+  grid-template-columns: repeat(1, 200px);
   gap: 48px 46px;
   padding: 50px 40px;
   max-width: 1400px;
-  /* Збільшено ширину контейнера каталогу */
   margin: 0 auto;
+
+  @media (min-width: 488px) {
+    grid-template-columns: repeat(2, 200px);
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 200px);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, 200px);
+  }
 }
 
 .card {
@@ -81,19 +102,15 @@ header {
   border-radius: 8px;
   padding: 20px;
   text-align: left;
-  transition: transform 300ms, box-shadow 300ms;
+  transition:
+    transform 300ms,
+    box-shadow 300ms;
   box-shadow: 0 2px 4px $hover-bg-color;
+  will-change: transform, box-shadow;
 
   &:hover {
     transform: scale(1.2);
     box-shadow: 0 4px 8px $hover-shadow-color;
-  }
-
-  &__image img {
-    width: 100%;
-    max-width: 200px;
-    margin: 0 auto 15px;
-    display: block;
   }
 
   &__title {
@@ -128,7 +145,6 @@ header {
 
         img {
           width: 16px;
-          /* Зменшено розмір зірок */
           height: 16px;
           margin-right: 2px;
         }
@@ -161,19 +177,18 @@ header {
 
   &__buy-btn {
     display: block;
-    /* Центрування кнопки */
     margin: 15px auto 0;
-    /* Вирівнювання по центру і відступ зверху */
     padding: 10px 0;
     font-size: 14px;
     color: #fff;
     background-color: $accent-color;
     text-decoration: none;
     border-radius: 5px;
-    width: 100px;
-    /* Фіксована ширина кнопки */
+    max-width: 120px; // Для більшої гнучкості
     text-align: center;
-    transition: background-color 300ms, color 300ms;
+    transition:
+      background-color 300ms,
+      color 300ms;
 
     &:hover {
       background-color: $button-hover-bg;
